@@ -9,6 +9,7 @@ func Parse(columnDetails domain.ColumnDetails) {
 	case domain.Date:
 		generateDateFormat(columnDetails)
 	case domain.Imsi:
+		generateImsiFormatter(columnDetails)
 	case domain.Msisdn:
 
 	}

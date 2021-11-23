@@ -3,20 +3,22 @@ package parser
 import (
 	"errors"
 	"fmt"
-	"github.com/aelmel/gencsv/internal/domain"
-	"github.com/aelmel/gencsv/internal/formatter"
 	"regexp"
 	"strings"
+
+	"github.com/aelmel/gencsv/internal/domain"
+	"github.com/aelmel/gencsv/internal/formatter"
+
 )
 
-const formatRegex = `^\(\w+(\|\w+)*\)$`
+const imsiFormatRegex = `^\(\d+(\|\d+)*\)$`
 
-func generateStringFormat(details domain.ColumnDetails) (formatter.Formatter, error) {
+func generateImsiFormatter(details domain.ColumnDetails) (formatter.Formatter, error) {
 	if details.Format == "" || details.Format == "*" {
-		return formatter.NewStringFormatter(nil, details.Length), nil
+		return formatter.NewImsiFormatter(make([]string, 0)), nil
 	}
 
-	result, err := regexp.MatchString(formatRegex, details.Format)
+	result, err := regexp.MatchString(imsiFormatRegex, details.Format)
 	if err != nil {
 		return nil, err
 	}

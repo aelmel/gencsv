@@ -27,6 +27,14 @@ func TestParse_StringParser(t *testing.T) {
 			},
 			want: []string{"true", "false"},
 		},
+		"Pattern one string": {
+			details: domain.ColumnDetails{
+				Type:   "string",
+				Length: 10,
+				Format: "(test)",
+			},
+			want: []string{"test"},
+		},
 	}
 
 	for name, tc := range tests {
