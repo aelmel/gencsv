@@ -1,11 +1,13 @@
 package parser
 
-import "gencsv/internal/domain"
+import (
+	"github.com/aelmel/gencsv/internal/domain"
+	"github.com/aelmel/gencsv/internal/formatter"
+)
 
-const defaultLength = 12
-
-func generateStringFormat(details domain.ColumnDetails) {
+func generateStringFormat(details domain.ColumnDetails) formatter.Formatter {
 	if details.Format == "" || details.Format == "*" {
-
+		return formatter.NewStringFormatter(nil, details.Length)
 	}
+	return nil
 }

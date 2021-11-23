@@ -1,4 +1,4 @@
-module gencsv
+module github.com/aelmel/gencsv
 
 go 1.17
 

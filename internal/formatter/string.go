@@ -31,6 +31,7 @@ func (s *stringFormatter) Generate() string {
 	if s.values != nil || len(s.values) != 0 {
 		return s.values[s.rand.Intn(len(s.values))]
 	}
+
 	return s.randomString()
 
 }

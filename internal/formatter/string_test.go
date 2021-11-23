@@ -32,6 +32,11 @@ func TestStringFormatter_GenerateValues(t *testing.T) {
 	}
 }
 
+func TestStringFormatter_GenerateZeroLength(t *testing.T) {
+	formatter := NewStringFormatter(nil, 0)
+	fmt.Println(formatter.Generate())
+}
+
 func contains(values []string, key string) bool {
 	for _, value := range values {
 		if value == key {

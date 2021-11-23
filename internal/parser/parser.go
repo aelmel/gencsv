@@ -1,6 +1,6 @@
 package parser
 
-import "gencsv/internal/domain"
+import "github.com/aelmel/gencsv/internal/domain"
 
 func Parse(columnDetails domain.ColumnDetails) {
 	switch columnDetails.Type {
