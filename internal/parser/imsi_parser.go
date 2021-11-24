@@ -8,7 +8,6 @@ import (
 
 	"github.com/aelmel/gencsv/internal/domain"
 	"github.com/aelmel/gencsv/internal/formatter"
-
 )
 
 const imsiFormatRegex = `^\(\d+(\|\d+)*\)$`
@@ -26,7 +25,7 @@ func generateImsiFormatter(details domain.ColumnDetails) (formatter.Formatter, e
 	if result {
 		format := trimFormatParentheses(details.Format)
 		values := strings.Split(format, "|")
-		return formatter.NewStringFormatter(values, 0), nil
+		return formatter.NewImsiFormatter(values), nil
 	}
 
 	return nil, errors.New(fmt.Sprintf("Unknown string format %s", details.Format))

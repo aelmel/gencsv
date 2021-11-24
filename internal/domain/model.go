@@ -1,10 +1,11 @@
 package domain
 
 type FileStructure struct {
-	Filename     string `json:"filename"`
-	ColumnNumber int    `json:"column_number"`
-	Header       string `json:"header"`
-	Rows         int    `json:"rows"`
+	Filename     string          `json:"filename"`
+	ColumnNumber int             `json:"column_number"`
+	Header       string          `json:"header"`
+	Rows         int             `json:"rows"`
+	Columns      []ColumnDetails `json:"columns"`
 }
 
 type ColumnDetails struct {
