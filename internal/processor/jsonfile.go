@@ -99,5 +99,5 @@ func (fp *fileProcessor) generateRow() {
 		row[i] = columnFormatter.Generate()
 	}
 
-	fp.rows <- strings.Join(row, ",")
+	fp.rows <- strings.Join(row, fp.fileStructure.Separator)
 }
