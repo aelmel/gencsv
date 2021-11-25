@@ -9,7 +9,7 @@ import (
 
 func main() {
 	var (
-		inputFile  = flag.String("input", "D:/gen.json", "Input file format")
+		inputFile  = flag.String("input", "", "Input file format")
 		outputFile = flag.String("output-dir", "./", "Output file directory")
 	)
 	logger, _ := zap.NewProduction()

@@ -5,6 +5,7 @@ type FileStructure struct {
 	ColumnNumber int             `json:"column_number"`
 	Header       string          `json:"header"`
 	Rows         int             `json:"rows"`
+	Separator    string          `json:"separator"`
 	Columns      []ColumnDetails `json:"columns"`
 }
 
