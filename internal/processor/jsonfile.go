@@ -2,6 +2,7 @@ package processor
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"path"
 	"strings"
@@ -49,13 +50,18 @@ func NewFileProcessor(input string, logger *zap.SugaredLogger) (*fileProcessor, 
 }
 
 func (fp *fileProcessor) GenerateOutput(output string) error {
-	f, err := os.OpenFile(path.Join(output, fp.fileStructure.Filename), os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)
+	fullPathOutput := path.Join(output, fp.fileStructure.Filename)
+	f, err := os.OpenFile(fullPathOutput, os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)
+	if fp.fileStructure.Header != "" {
+		f.WriteString(fp.fileStructure.Header + "\n")
+	}
 	if err != nil {
 		fp.logger.Error("error opening file", zap.Error(err))
 		return err
 	}
 	defer f.Close()
 
+	fp.logger.Info(fmt.Sprintf("Genereting file %s", fullPathOutput))
 	for i := 0; i < fp.fileStructure.Rows; i++ {
 		fp.wg.Add(1)
 		go fp.generateRow()
@@ -65,6 +71,7 @@ func (fp *fileProcessor) GenerateOutput(output string) error {
 	for row := range fp.rows {
 		f.WriteString(row + "\n")
 	}
+	fp.logger.Info(fmt.Sprintf("Done genereting file %s", fullPathOutput))
 	return nil
 }
 
