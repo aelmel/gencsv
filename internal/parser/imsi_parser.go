@@ -10,14 +10,14 @@ import (
 	"github.com/aelmel/gencsv/internal/formatter"
 )
 
-const imsiFormatRegex = `^\(\d+(\|\d+)*\)$`
+const imsiMsisdnFormatRegex = `^\(\d+(\|\d+)*\)$`
 
 func generateImsiFormatter(details domain.ColumnDetails) (formatter.Formatter, error) {
 	if details.Format == "" || details.Format == "*" {
 		return formatter.NewImsiFormatter(make([]string, 0)), nil
 	}
 
-	result, err := regexp.MatchString(imsiFormatRegex, details.Format)
+	result, err := regexp.MatchString(imsiMsisdnFormatRegex, details.Format)
 	if err != nil {
 		return nil, err
 	}
@@ -28,5 +28,5 @@ func generateImsiFormatter(details domain.ColumnDetails) (formatter.Formatter, e
 		return formatter.NewImsiFormatter(values), nil
 	}
 
-	return nil, errors.New(fmt.Sprintf("Unknown string format %s", details.Format))
+	return nil, errors.New(fmt.Sprintf("Unknown imsi format %s", details.Format))
 }

@@ -14,7 +14,7 @@ func Parse(columnDetails domain.ColumnDetails) (formatter.Formatter, error) {
 	case domain.Imsi:
 		return generateImsiFormatter(columnDetails)
 	case domain.Msisdn:
-		return generateMsisdnParser()
+		return generateMsisdnParser(columnDetails)
 	}
 	return nil, nil
 }
