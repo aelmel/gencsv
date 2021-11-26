@@ -12,6 +12,7 @@ func main() {
 		inputFile  = flag.String("input", "", "Input file format")
 		outputFile = flag.String("output-dir", "./", "Output file directory")
 	)
+	flag.Parse()
 	logger, _ := zap.NewProduction()
 	defer logger.Sync()
 	sugar := logger.Sugar()
