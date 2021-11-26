@@ -11,7 +11,7 @@ import (
 )
 
 func generateMsisdnParser(details domain.ColumnDetails) (formatter.Formatter, error) {
-	if details.Format == "" && details.Format == "*" {
+	if details.Format == "" || details.Format == "*" {
 		formatter.NewMsisdnFormatter(make([]string, 0), details.Length)
 	}
 
