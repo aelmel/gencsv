@@ -26,8 +26,8 @@ jobs:
         run: go build cmd/
       - name: Run vet and lint
         run: |
-          go vet .
-          go lint .
+          go vet ./...
+          go lint ./...
       - name: Run go build
         run: |
           go test -v ./...
