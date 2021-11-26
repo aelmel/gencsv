@@ -1,6 +1,7 @@
 package processor
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -52,12 +53,13 @@ func NewFileProcessor(input string, logger *zap.SugaredLogger) (*fileProcessor, 
 func (fp *fileProcessor) GenerateOutput(output string) error {
 	fullPathOutput := path.Join(output, fp.fileStructure.Filename)
 	f, err := os.OpenFile(fullPathOutput, os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)
-	if fp.fileStructure.Header != "" {
-		f.WriteString(fp.fileStructure.Header + "\n")
-	}
 	if err != nil {
 		fp.logger.Error("error opening file", zap.Error(err))
 		return err
+	}
+	writer := bufio.NewWriter(f)
+	if fp.fileStructure.Header != "" {
+		writer.WriteString(fp.fileStructure.Header + "\n")
 	}
 	defer f.Close()
 
@@ -69,8 +71,9 @@ func (fp *fileProcessor) GenerateOutput(output string) error {
 
 	go fp.monitor()
 	for row := range fp.rows {
-		f.WriteString(row + "\n")
+		writer.WriteString(row + "\n")
 	}
+	writer.Flush()
 	fp.logger.Info(fmt.Sprintf("Done genereting file %s", fullPathOutput))
 	return nil
 }
