@@ -17,7 +17,7 @@ jobs:
       - name: Go Setup
         uses: actions/setup-go@v2
         with:
-          go-verions: '1.17'
+          go-verion: '1.17'
       - name: Install dependencies
         run: |
           go version
